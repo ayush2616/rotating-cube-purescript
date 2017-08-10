@@ -2855,6 +2855,12 @@ var PS = {};
       };
   };
 
+  //main ::forall a. Eff (console :: CONSOLE|a) Unit
+  var main = (function () {
+      var zzz = $foreign.setFlag(false);
+      return Control_Monad_Eff_Console.log($foreign.getTime);
+  })();
+
   /**
  * startRotation speed x =do
  *   xx <- newSTRef x
@@ -2898,8 +2904,8 @@ var PS = {};
           return function __do() {
               var v = Graphics_Canvas.getCanvasElementById("canvas1")();
               var __unused = function (dictPartial1) {
-                  return function ($dollar23) {
-                      return $dollar23;
+                  return function ($dollar21) {
+                      return $dollar21;
                   };
               };
               return __unused(dictPartial)((function () {
@@ -2921,8 +2927,8 @@ var PS = {};
               return function __do() {
                   var v = Graphics_Canvas.getCanvasElementById("canvas1")();
                   var __unused = function (dictPartial1) {
-                      return function ($dollar27) {
-                          return $dollar27;
+                      return function ($dollar25) {
+                          return $dollar25;
                       };
                   };
                   return __unused(dictPartial)((function () {
@@ -2955,8 +2961,8 @@ var PS = {};
                           var direction = (v1.x - v.x) / $$Math.abs(v1.x - v.x);
                           var v2 = Control_Monad_ST.newSTRef(0.0)();
                           var tFlag = (function () {
-                              var $42 = speed < 1.0;
-                              if ($42) {
+                              var $39 = speed < 1.0;
+                              if ($39) {
                                   return $foreign.setFlag(false);
                               };
                               return $foreign.setFlag(true);
@@ -2968,8 +2974,8 @@ var PS = {};
                               Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_ST.writeSTRef(v2)(v3 + direction))();
                               var zz = $foreign.getFlag(true);
                               if (zz) {
-                                  var $45 = speedInt > 200;
-                                  if ($45) {
+                                  var $42 = speedInt > 200;
+                                  if ($42) {
                                       return Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_Eff_Timer.setTimeout(1000000 / (360 * 200 | 0) | 0)(rotateF))();
                                   };
                                   return Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_Eff_Timer.setTimeout(1000000 / (360 * speedInt | 0) | 0)(rotateF))();
@@ -2977,8 +2983,8 @@ var PS = {};
                               return Data_Unit.unit;
                           };
                           (function () {
-                              var $46 = speed >= 1.0;
-                              if ($46) {
+                              var $43 = speed >= 1.0;
+                              if ($43) {
                                   return rotateF;
                               };
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
@@ -2994,28 +3000,24 @@ var PS = {};
       return function __do() {
           var v = Control_Monad_Eff_JQuery.body();
           var v1 = Control_Monad_ST.newSTRef(true)();
-          var v2 = Control_Monad_ST.newSTRef({
-              x: 0.0, 
-              y: 0.0
-          })();
           var downHandler = function (event) {
               return function (jq) {
                   return function __do() {
-                      var v3 = Control_Monad_Eff_JQuery.getPageX(event)();
-                      var v4 = Control_Monad_Eff_JQuery.getPageY(event)();
-                      var v5 = Control_Monad_ST.newSTRef({
-                          x: v3, 
-                          y: v4
+                      var v2 = Control_Monad_Eff_JQuery.getPageX(event)();
+                      var v3 = Control_Monad_Eff_JQuery.getPageY(event)();
+                      var v4 = Control_Monad_ST.newSTRef({
+                          x: v2, 
+                          y: v3
                       })();
-                      var v6 = Signal_Time.now();
-                      Control_Monad_Eff_Console.log("aaaa" + Data_Show.show(Data_Show.showNumber)(v6))();
+                      var v5 = Signal_Time.now();
+                      Control_Monad_Eff_Console.log("aaaa" + Data_Show.show(Data_Show.showNumber)(v5))();
                       var moveHandler = function (event1) {
                           return function (jq1) {
                               return function __do() {
-                                  var v7 = Control_Monad_Eff_JQuery.getPageX(event1)();
-                                  var v8 = Control_Monad_Eff_JQuery.getPageY(event1)();
-                                  var dx = -(v8 - v4);
-                                  var dy = -(v7 - v3);
+                                  var v6 = Control_Monad_Eff_JQuery.getPageX(event1)();
+                                  var v7 = Control_Monad_Eff_JQuery.getPageY(event1)();
+                                  var dx = -(v7 - v3);
+                                  var dy = -(v6 - v2);
                                   funcX(dictPartial)(dx * 5.0e-2)(dy * 5.0e-2)();
                                   return Control_Monad_Eff_Console.log(Data_Show.show(Data_Show.showNumber)(dx) + (" " + Data_Show.show(Data_Show.showNumber)(dy)))();
                               };
@@ -3024,16 +3026,16 @@ var PS = {};
                       var upHandler = function (event1) {
                           return function (jq1) {
                               return function __do() {
-                                  var v7 = Control_Monad_Eff_JQuery.getPageX(event1)();
-                                  var v8 = Control_Monad_Eff_JQuery.getPageY(event1)();
-                                  var v9 = Control_Monad_ST.newSTRef({
-                                      x: v7, 
-                                      y: v8
+                                  var v6 = Control_Monad_Eff_JQuery.getPageX(event1)();
+                                  var v7 = Control_Monad_Eff_JQuery.getPageY(event1)();
+                                  var v8 = Control_Monad_ST.newSTRef({
+                                      x: v6, 
+                                      y: v7
                                   })();
                                   Control_Monad_Eff_JQuery.off("mousemove")(v)();
-                                  var v10 = Signal_Time.now();
-                                  Control_Monad_Eff_Console.log(Data_Show.show(Data_Show.showNumber)(v6) + ("   " + Data_Show.show(Data_Show.showNumber)(v10)))();
-                                  infRotate(dictPartial)(v6)(v10)(v5)(v9)();
+                                  var v9 = Signal_Time.now();
+                                  Control_Monad_Eff_Console.log(Data_Show.show(Data_Show.showNumber)(v5) + ("   " + Data_Show.show(Data_Show.showNumber)(v9)))();
+                                  infRotate(dictPartial)(v5)(v9)(v4)(v8)();
                                   return Control_Monad_Eff_JQuery.off("mouseup")(v)();
                               };
                           };
@@ -3044,16 +3046,6 @@ var PS = {};
               };
           };
           return Control_Monad_Eff_JQuery.on("mousedown")(downHandler)(v)();
-      };
-  };
-
-  //main ::forall a. Eff (console :: CONSOLE|a) Unit
-  var main = function (dictPartial) {
-      var zzz = $foreign.setFlag(false);
-      return function __do() {
-          var v = startMouseHandlers(dictPartial)();
-          Data_Functor["void"](Control_Monad_Eff.functorEff)(first(dictPartial)(5.0))();
-          return Control_Monad_Eff_Console.log($foreign.getTime)();
       };
   };
   exports["clearCanvas"] = clearCanvas;

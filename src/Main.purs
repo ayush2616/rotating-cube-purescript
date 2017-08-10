@@ -59,8 +59,8 @@ clearCanvas ctx = do
 --main ::forall a. Eff (console :: CONSOLE|a) Unit
 main = do
   let zzz=setFlag false
-  _<- startMouseHandlers
-  void $ first 5.0
+  --_<- startMouseHandlers
+  --void $ first 5.0
   log (getTime)
 
 first :: forall a. Partial=> Number -> Eff(canvas::CANVAS|a) Unit
@@ -73,7 +73,6 @@ startMouseHandlers :: forall a b.Partial => Eff( dom :: DOM, canvas :: CANVAS, c
 startMouseHandlers= do
   body <- body
   aa <- newSTRef true
-  mousePosRef <- newSTRef {x:0.0,y:0.0}
   let downHandler event jq = do
         sX <- getPageX event
         sY <- getPageY event
