@@ -2825,7 +2825,6 @@ var PS = {};
   var Data_EuclideanRing = PS["Data.EuclideanRing"];
   var Data_Function = PS["Data.Function"];
   var Data_Functor = PS["Data.Functor"];
-  var Data_HeytingAlgebra = PS["Data.HeytingAlgebra"];
   var Data_Int = PS["Data.Int"];
   var Data_Maybe = PS["Data.Maybe"];
   var Data_Ord = PS["Data.Ord"];
@@ -2834,7 +2833,6 @@ var PS = {};
   var Data_Semiring = PS["Data.Semiring"];
   var Data_Show = PS["Data.Show"];
   var Data_Unit = PS["Data.Unit"];
-  var Flare = PS["Flare"];
   var Flare_Drawing = PS["Flare.Drawing"];
   var Graphics_Canvas = PS["Graphics.Canvas"];
   var Graphics_Drawing = PS["Graphics.Drawing"];
@@ -2856,10 +2854,6 @@ var PS = {};
           };
       };
   };
-  var main = (function () {
-      var zzz = $foreign.setFlag(false);
-      return Control_Monad_Eff_Console.log($foreign.getTime);
-  })();
 
   /**
  * startRotation speed x =do
@@ -2887,7 +2881,6 @@ var PS = {};
           return Control_Monad_Eff_Console.log(Data_Show.show(Data_Show.showNumber)(x) + Data_Show.show(Data_Show.showNumber)(y));
       };
   };
-  var flag11 = Control_Monad_ST.newSTRef(true);
   var clearCanvas = function (ctx) {
       return function __do() {
           Data_Functor["void"](Control_Monad_Eff.functorEff)(Graphics_Canvas.setFillStyle("#ffffff")(ctx))();
@@ -2905,8 +2898,8 @@ var PS = {};
           return function __do() {
               var v = Graphics_Canvas.getCanvasElementById("canvas1")();
               var __unused = function (dictPartial1) {
-                  return function ($dollar24) {
-                      return $dollar24;
+                  return function ($dollar23) {
+                      return $dollar23;
                   };
               };
               return __unused(dictPartial)((function () {
@@ -2928,8 +2921,8 @@ var PS = {};
               return function __do() {
                   var v = Graphics_Canvas.getCanvasElementById("canvas1")();
                   var __unused = function (dictPartial1) {
-                      return function ($dollar28) {
-                          return $dollar28;
+                      return function ($dollar27) {
+                          return $dollar27;
                       };
                   };
                   return __unused(dictPartial)((function () {
@@ -2940,7 +2933,7 @@ var PS = {};
                               return Graphics_Drawing.render(v1)(scene(0.0)(y)(0.0)(0.0))();
                           };
                       };
-                      throw new Error("Failed pattern match at Main line 51, column 3 - line 52, column 3: " + [ v.constructor.name ]);
+                      throw new Error("Failed pattern match at Main line 49, column 3 - line 50, column 3: " + [ v.constructor.name ]);
                   })())();
               };
           };
@@ -2961,31 +2954,22 @@ var PS = {};
                           var speedInt = Data_Maybe.fromMaybe(0)(Data_Int.fromNumber($$Math.trunc(speed)));
                           var direction = (v1.x - v.x) / $$Math.abs(v1.x - v.x);
                           var v2 = Control_Monad_ST.newSTRef(0.0)();
-                          var v3 = flag11();
-                          Data_Functor["void"](Control_Monad_Eff.functorEff)((function () {
-                              var $43 = speed < 1.0;
-                              if ($43) {
-                                  return Control_Monad_ST.writeSTRef(v3)(false);
-                              };
-                              return Control_Monad_ST.writeSTRef(v3)(true);
-                          })())();
                           var tFlag = (function () {
-                              var $44 = speed < 1.0;
-                              if ($44) {
+                              var $42 = speed < 1.0;
+                              if ($42) {
                                   return $foreign.setFlag(false);
                               };
                               return $foreign.setFlag(true);
                           })();
                           var rotateF = function __do() {
-                              var v4 = Control_Monad_ST.readSTRef(v2)();
-                              funcX(dictPartial)(0.0)(v4 + direction * 0.5)();
-                              Control_Monad_Eff_Console.log(Data_Show.show(Data_Show.showNumber)(v4))();
-                              Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_ST.writeSTRef(v2)(v4 + direction))();
-                              var v5 = flag11();
+                              var v3 = Control_Monad_ST.readSTRef(v2)();
+                              funcX(dictPartial)(0.0)(v3 + direction * 0.5)();
+                              Control_Monad_Eff_Console.log(Data_Show.show(Data_Show.showNumber)(v3))();
+                              Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_ST.writeSTRef(v2)(v3 + direction))();
                               var zz = $foreign.getFlag(true);
                               if (zz) {
-                                  var $48 = speedInt > 200;
-                                  if ($48) {
+                                  var $45 = speedInt > 200;
+                                  if ($45) {
                                       return Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_Eff_Timer.setTimeout(1000000 / (360 * 200 | 0) | 0)(rotateF))();
                                   };
                                   return Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_Eff_Timer.setTimeout(1000000 / (360 * speedInt | 0) | 0)(rotateF))();
@@ -2993,8 +2977,8 @@ var PS = {};
                               return Data_Unit.unit;
                           };
                           (function () {
-                              var $49 = speed >= 1.0;
-                              if ($49) {
+                              var $46 = speed >= 1.0;
+                              if ($46) {
                                   return rotateF;
                               };
                               return Control_Applicative.pure(Control_Monad_Eff.applicativeEff)(Data_Unit.unit);
@@ -3062,9 +3046,18 @@ var PS = {};
           return Control_Monad_Eff_JQuery.on("mousedown")(downHandler)(v)();
       };
   };
+
+  //main ::forall a. Eff (console :: CONSOLE|a) Unit
+  var main = function (dictPartial) {
+      var zzz = $foreign.setFlag(false);
+      return function __do() {
+          var v = startMouseHandlers(dictPartial)();
+          Data_Functor["void"](Control_Monad_Eff.functorEff)(first(dictPartial)(5.0))();
+          return Control_Monad_Eff_Console.log($foreign.getTime)();
+      };
+  };
   exports["clearCanvas"] = clearCanvas;
   exports["first"] = first;
-  exports["flag11"] = flag11;
   exports["func2"] = func2;
   exports["funcX"] = funcX;
   exports["getDistance"] = getDistance;

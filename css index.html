@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Hey
+	</title>
+	<style type="text/css">
+		.scene{
+			margin-top: 300px;
+		}
+		.cube {
+		  position:relative;
+		  width: 200px;
+		  height: 200px;
+		  transform: rotateX(42deg) rotateY(42deg);
+		  transform-style: preserve-3d;
+		}
+		.side {
+		  position: absolute;
+		  width: 200px;
+		  height: 200px;
+		}
+		.back {
+			background:#3F51B5;
+		  transform: translateZ(-100px);
+		}
+		.left {
+			background:#8BC34A;
+		  transform: translateX(-100px) rotateY(90deg);
+		}
+		.right {
+			background:#CDDC39;
+		  transform: translateX(100px) rotateY(90deg);
+		}
+		.top {
+			background:#00E676;
+		  transform: translateY(-100px) rotateX(90deg);
+		}
+		.bottom {
+			background:#FFFF00;
+		  transform: translateY(100px) rotateX(90deg);
+		}
+		.front {
+			background:#F4511E;
+		  transform: translateZ(100px);
+		}
+	</style>
+</head>
+<body>
+	<center>
+		<div class="scene">
+		  <div class="cube">
+		    <div class="side back"></div>
+		    <div class="side left"></div>
+		    <div class="side right"></div>
+		    <div class="side top"></div>
+		    <div class="side bottom"></div>
+		    <div class="side front"></div>
+		  </div>
+		</div>
+	</center>
+</body>
+</html>

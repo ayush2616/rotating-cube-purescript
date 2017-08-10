@@ -56,9 +56,11 @@ clearCanvas ctx = do
   void $ fillRect ctx { x: 0.0, y: 0.0, w: 1500.0, h: 1080.0 }
   pure unit
 
-main ::forall a. Eff (console :: CONSOLE|a) Unit
+--main ::forall a. Eff (console :: CONSOLE|a) Unit
 main = do
   let zzz=setFlag false
+  _<- startMouseHandlers
+  void $ first 5.0
   log (getTime)
 
 first :: forall a. Partial=> Number -> Eff(canvas::CANVAS|a) Unit
