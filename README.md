@@ -8,12 +8,11 @@ $  bower install
 
 To build the project use - pulp build -O --to "any.js"
 
-Make new HTML page and create a canvas with id="canvas1" , import any.js and main.js
+Make new HTML page and create a canvas with id="canvas1" , import any.js.
 
-Add a head tag as
+Add following line in head tag
 
-  <head>
-  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
-  </head>
+ 
