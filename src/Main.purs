@@ -32,7 +32,7 @@ scene rotX rotY rotZ time =
   D.translate 500.0 300.0 $
     renderScene { x: -2.0, y: -1.0, z: 0.0 } $
       scale 50.0 $ rotateX rotX $ rotateY rotY $ rotateZ rotZ $
-           filled blue  (cube (P.point (-3.0) (-3.0) (-3.0)) 6.0 )
+           filled blue $ cube (P.point (-3.0) (-3.0) (-3.0)) 6.0
 
 funcX ::forall c.Partial => Number -> Number -> Eff(canvas:: CANVAS |c) Unit
 funcX x y= do
@@ -113,7 +113,7 @@ startStoping =do
         log ""
         let upF=getUpFlag true 
             oldSpeed=getSpeed 0.0
-            decSpeed= getDecRatio (oldSpeed)
+            decSpeed= getDecRatio $ oldSpeed
             nS= if oldSpeed > 0.0 then (setSpeed (oldSpeed-decSpeed)) else 0.0
         if false
           then pure unit
@@ -159,8 +159,8 @@ infRotate st end startM endM= do
   let dist = getDistance sx sy ex ey
       speed = dist / (trunc diff)
       direction= ((ex-sx)/(abs (ex-sx)) / 10.0)
-      speedInt=(fromMaybe 0 $ fromNumber $ trunc speed)
-      ss = setSpeed (speed/10.0)
+      speedInt=fromMaybe 0 $ fromNumber $ trunc speed
+      ss = setSpeed $ speed/10.0
   xx <- newSTRef 0.0
 
   let tFlag=
@@ -174,7 +174,7 @@ infRotate st end startM endM= do
         funcX 0.0 x
         
         --log (show getX)
-        let newSpeed= (fromMaybe 1 $  fromNumber $ trunc $ getSpeed 0.0)
+        let newSpeed= fromMaybe 1 $  fromNumber $ trunc $ getSpeed 0.0
         log ("new Speed"<> show newSpeed)
         --if getX == 360.0 then void $ writeSTRef xx (0.0) else
         --void $ writeSTRef xx (getX+direction)
@@ -184,7 +184,7 @@ infRotate st end startM endM= do
           then
             if newSpeed> 2000
               then
-                void $ setTimeout (1000/(2000)) (rotateF (x+ ( direction)))
+                void $ setTimeout (1000/(2000)) $ rotateF $ x+ direction
               else
                 void $ setTimeout (10000/(180 * newSpeed)) (rotateF (x+( direction)) )
           else pure unit
